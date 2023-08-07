@@ -1,0 +1,14 @@
+---
+- hosts: 172.16.4.30
+  tasks:
+  - copy:
+     src: /root/scripts/mongo.j2
+     dest: /etc/yum.repos.d/mongodb.repo
+  - yum:
+     name: mongodb-org
+     state: present
+  - service: 
+     name: mongod
+     state: started
+     enabled: true
+

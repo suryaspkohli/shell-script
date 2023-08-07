@@ -1,0 +1,17 @@
+---
+- hosts: 172.16.1.169
+  tasks:
+  - get_url:
+     url: http://mirrors.ibiblio.org/apache/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
+     dest: /opt
+  - ansible.builtin.unarchive:
+     src: /opt/apache-maven-3.5.4-bin.tar.gz
+     dest: /opt
+  - command: mv /opt/apache-maven-3.5.4 /opt/apache-maven
+  - copy:
+     src: /root/scripts/mvn.j2
+     dest: /etc/profile.d/maven.sh
+  - shell: chmod +x /etc/profile.d/maven.sh; source /etc/profile.d/maven.sh
+  - command: mvn --version
+
+     

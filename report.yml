@@ -1,0 +1,6 @@
+---
+- hosts: 13.126.148.5
+  remote_user: ec2-user
+  become: true
+  tasks:
+  - shell: 'df -TH; free -h'

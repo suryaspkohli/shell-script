@@ -1,0 +1,7 @@
+INVENTOY_HOST={{ inventory_hostname |default('NONE',true)}}
+BIOS_VERS={{ ansible_bios_version |default('NONE',true)}}
+TOTAL_MEM_MB={{ ansible_memtotal_mb |default('NONE',true)}}
+HDD_SIZE={% if ansible_devices.sdc is defined %}
+{{ ansible_devices.sdc.size }} {% else %}
+NONE
+{% endif %}

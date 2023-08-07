@@ -1,0 +1,15 @@
+---
+- hosts: 172.16.4.30
+  tasks:
+  - copy:
+     src: /home/nitin/Downloads/mongochef-4.3.0-linux-x64-dist
+     dest: /opt
+  - file:
+     src: /opt/mongochef-4.3.0-linux-x64-dist/bin/mongochef.sh
+     dest: /usr/bin/mongochef
+     state: link
+  - name: Creating Desktop Environment
+    copy:
+     src: /root/scripts/mongochef.j2
+     dest: /usr/share/applications/mongochef.desktop
+   

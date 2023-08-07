@@ -1,10 +1,7 @@
 #!/bin/bash
-cat /opt/list.txt | while read output
-do
-ping -c 1 "$output" > /dev/null
-if [ $? -eq 0 ]; then
-echo "node $output is up" 
-else
-echo "node $output is down" | mail -s " node is down please check" linux.support@manikarananalytics.in
-fi
-done
+
+#ping 164.52.194.160 | while read pong; do echo "$(date): $pong"; done  >> /home/nitin/realtime.txt
+
+ping 172.16.114.29 | xargs -L 1 -I '{}' date '+%Y-%m-%d %H:%M:%S: {}' >> /home/ping/realtime_ping.txt
+
+

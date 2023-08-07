@@ -1,0 +1,9 @@
+---
+- hosts: 172.16.4.30
+  tasks: 
+  - get_url: 
+     url: https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+     dest: /opt
+  - yum:
+     name: /opt/google-chrome-stable_current_x86_64.rpm
+     state: present

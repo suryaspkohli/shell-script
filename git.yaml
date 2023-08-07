@@ -1,0 +1,10 @@
+---
+- hosts: 172.16.4.30
+  tasks:
+  - get_url:
+     url: http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm
+     dest: /root
+  - shell: rpm -U /root/wandisco-git-release-7-2.noarch.rpm
+  - yum:
+     name: git
+     state: present

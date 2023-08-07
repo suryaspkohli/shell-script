@@ -1,0 +1,7 @@
+---
+- hosts: 172.16.0.67
+  tasks:
+  - template:
+     src: bios.j2
+     dest: /root/script/bios.txt
+     

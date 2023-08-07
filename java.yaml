@@ -1,0 +1,30 @@
+---
+- hosts: 172.16.1.170,172.16.1.169
+  tasks:
+  - copy:
+     src: /home/nitin/software/jdk-8u211-linux-x64.tar.gz
+     dest: /opt
+  - unarchive:
+     src: /opt/jdk-8u211-linux-x64.tar.gz
+     dest: /opt
+  - shell: rm -rf /usr/bin/java; rm -rf /etc/alternatives/java
+  - file:
+     src: /opt/jdk1.8.0_211/bin/java
+     dest: /usr/bin/java
+     state: link
+  - file:
+     src: /opt/jdk1.8.0_211/bin/java
+     dest: /etc/alternatives/java
+     state: link
+  - name: Creating JAVA_HOME environment
+    lineinfile:
+     dest: /etc/profile
+     state: present
+     regexp: '^JAVA_HOME'
+     line: 'export JAVA_HOME=/opt/jdk1.8.0_211'
+  - shell: source /etc/profile
+    register: output 
+    args:
+     executable: /bin/bash
+  - debug: msg= "{{ output }}"
+#  - shell: echo $JAVA_HOME

@@ -1,0 +1,23 @@
+---
+- hosts: 3.92.18.7
+  tasks:
+  - get_url: 
+     url: https://downloads.apache.org/tomcat/tomcat-8/v8.5.78/bin/apache-tomcat-8.5.78.tar.gz
+     dest: /opt
+  - ansible.builtin.unarchive:
+     src: /opt/apache-tomcat-8.5.78.tar.gz
+     dest: /opt
+  - ansible.builtin.file:
+     path: /opt/apache-tomcat-8.5.78/bin
+     mode: '0777'
+     state: directory
+##  - shell: ./startup.sh
+##   args:
+##     chdir: /opt/apache-tomcat-8.5.77/bin
+#  - name: enable tomcat startup
+#    systemd:
+#     name: tomcat
+#     enabled: yes
+#     state: restarted
+#     become: true    
+  - shell: nohup /opt/apache-tomcat-8.5.78/bin/startup.sh
