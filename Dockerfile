@@ -1,5 +1,10 @@
-FROM openjdk:8-jdk-alpine
-VOLUME /tmp
-ARG JAR_FILE=/target/re-schedule-upload-0.0.1-SNAPSHOT.jar
-COPY ${JAR_FILE} re-schedule-upload.jar
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-Duser.timezone=IST","-jar","/re-schedule-upload.jar"]
+FROM tomcat:8-jre8
+
+MAINTAINER "Devops <linux.support@manikarananalytics.in>"
+ENV CATALINA_OPTS="-Dserver.mode=prod -Duser.timezone=Asia/Kolkata"
+ADD re-config-mgmt-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/
+RUN rm -rf /usr/local/tomcat/webapps/ROOT
+EXPOSE 8080
+
+CMD ["catalina.sh", "run"]
+
